@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Profile</title>
+    <!-- Bootstrap CSS -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="/css/profile.css" />
+    <link
+      rel="apple-touch-icon"
+      sizes="180x180"
+      href="/images/favicon/apple-touch-icon.png"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="32x32"
+      href="/images/favicon/favicon-32x32.png"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="16x16"
+      href="/images/favicon/favicon-16x16.png"
+    />
+    <link rel="manifest" href="/images/favicon/site.webmanifest" />
+    <style>
+      .adverts .card {
+        width: 200px; /* Adjust the width as needed */
+        margin: 10px; /* Adjust the margin as needed */
+      }
+    </style>
+  </head>
+  <body>
+    <a href="/products" class="products">Products</a>
+
+    <div class="container">
+      <ul class="nav nav-tabs" id="myTab" role="tablist">
+        <li class="nav-item" role="presentation">
+          <button
+            class="nav-link active"
+            id="profile-tab"
+            data-bs-toggle="tab"
+            data-bs-target="#profile"
+            type="button"
+            role="tab"
+            aria-controls="profile"
+            aria-selected="true"
+          >
+            Profile
+          </button>
+        </li>
+        <li class="nav-item" role="presentation">
+          <button
+            class="nav-link"
+            id="adverts-tab"
+            data-bs-toggle="tab"
+            data-bs-target="#adverts"
+            type="button"
+            role="tab"
+            aria-controls="adverts"
+            aria-selected="false"
+          >
+            Adverts
+          </button>
+        </li>
+      </ul>
+      <div class="tab-content" id="myTabContent">
+        <div
+          class="tab-pane fade show active"
+          id="profile"
+          role="tabpanel"
+          aria-labelledby="profile-tab"
+        >
+          <!-- Profile details here -->
+          <section id="profile">
+            <aside class="row">
+              <h5 id="name">Name</h5>
+              <br/><br />
+              <h5 id="username">Username</h5>
+              <br/><br />
+              <h6 id="email">email@gmail.com</h6>
+            </aside>
+            <aside class="row" id="buttons">
+              <button id="edit-profile-button">Edit Profile &#128394;</button>
+              <button id="delete-profile-button">Delete Profile &#10060;</button>
+            </aside>
+            <aside class="row" id="edit-profile">
+              <br/>
+              <label for="username-input">Username:</label>
+              <input type="text" id="username-input" />
+              <br/><br />
+              <label for="email-input">Email:</label>
+              <input type="email" id="email-input" />
+              <br /><br />
+              <button id="save-profile-button">Save Profile &#128190;</button>
+            </aside>
+          </section>
+        </div>
+        <div
+          class="tab-pane fade"
+          id="adverts"
+          role="tabpanel"
+          aria-labelledby="adverts-tab"
+        >
+          <!-- Adverts here -->
+          <section class="adverts">
+            <!-- User's adverts here -->
+          </section>
+        </div>
+      </div>
+    </div>
+
+    <!-- Bootstrap JS Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js"></script>
+
+    <script>
+      function getProfile() {
+        const name = document.querySelector("#name");
+        const username = document.querySelector("#username");
+        const email = document.querySelector("#email");
+        fetch("/api/user/profile", {
+          method: "GET",
+          credentials: "include",
+          headers: {
+            "Content-Type": "application/json",
+          },
+        })
+          .then((response) => response.json())
+          .then((data) => {
+            console.log(data);
+            name.textContent = `${data.name} ${data.surname}`;
+            username.textContent = data.username;
+            email.textContent = data.email;
+            document.title = data.name;
+          });
+      }
+
+      const editProfileButton = document.querySelector("#edit-profile-button");
+      const saveProfileButton = document.querySelector("#save-profile-button");
+      const usernameInput = document.querySelector("#username-input");
+      const emailInput = document.querySelector("#email-input");
+      const deleteProfileButton = document.querySelector("#delete-profile-button");
+    
+      // Function to toggle between profile view and edit view
+      function toggleProfileEditView() {
+        const profileSection = document.querySelector("#profile");
+        profileSection.classList.toggle("edit-mode");
+        usernameInput.value = username.textContent;
+        emailInput.value = email.textContent;
+      }
+    
+      // Event listener for the "Edit Profile" button
+      editProfileButton.addEventListener("click", toggleProfileEditView);
+    
+      // Event listener for the "Save Profile" button
+      saveProfileButton.addEventListener("click", () => {
+        const updatedUsername = usernameInput.value;
+        const updatedEmail = emailInput.value;
+    
+        // Perform validation on the updated username and email if needed
+        
+        // Make anAPI call to update the user's profile
+        fetch("/api/user/profile", {
+          method: "PUT",
+          credentials: "include",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            username: updatedUsername,
+            email: updatedEmail,
+          }),
+        })
+        .then((response) => response.json())
+    .then((data) => {
+      if (data.success) {
+        // Update the displayed username and email
+        username.textContent = updatedUsername;
+        email.textContent = updatedEmail;
+      } else {
+        // Handle error case if necessary
+        console.error("Failed to update profile:", data.error);
+      }
+          });
+          const confirmation = confirm("Profile Updated!");
+          window.location.href = "/user/profile"; 
+
+      });
+      
+      // Event listener for the "Delete Profile" button
+      deleteProfileButton.addEventListener("click", () => {
+        const confirmation = confirm("Are you sure you want to delete your profile?");
+        if (confirmation) {
+          // Make an API call to delete the user's profile
+          fetch("/api/user/profile", {
+            method: "DELETE",
+            credentials: "include",
+            headers: {
+              "Content-Type": "application/json",
+            },
+          })
+            .then((response) => response.json())
+            .then((data) => {
+              if (data.success) {
+                // Handle successful deletion, e.g., redirect to a login page
+
+                window.location.assign("/login");
+              } else {
+                // Handle error case if necessary
+                console.error("Failed to delete profile:", data.error);
+              }
+            });
+        }
+        else alert("error!");
+      });
+
+      function getUserAdverts() {
+        const adverts = document.querySelector(".adverts");
+        fetch("/api/user/profile/adverts", {
+          method: "GET",
+          credentials: "include",
+          headers: {
+            "Content-Type": "application/json",
+          },
+        })
+          .then((response) => response.json())
+          .then((data) => {
+            console.log(data);
+            data.forEach((advert) => {
+              const div = document.createElement("div");
+              div.className = "card";
+              div.innerHTML = `
+              <img src="data:image/*;base64,${advert.image}" class="card-img-top" alt="${advert.productName}" />
+              <div class="card-body">
+                <h4 class="card-title text-secondary">${advert.productName}</h4>
+                <p class="card-text text-secondary">${advert.price}</p>
+              </div>
+            `;
+              adverts.appendChild(div);
+            });
+          });
+      }
+
+      getProfile();
+      getUserAdverts();
+    </script>
+  </body>
+</html>

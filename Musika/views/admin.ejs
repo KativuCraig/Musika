@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>My Dashboard</title>
+    <link rel="stylesheet" href="../css/AdminStyle.css" />
+    <script
+      type="module"
+      src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"
+      defer
+    ></script>
+    <script
+      nomodule
+      src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"
+      defer
+    ></script>
+
+    <script type="text/javascript">
+      function toggleDarkTheme() {
+        var modeToggle = document.getElementById("modeToggle");
+        var body = document.body;
+        body.classList.toggle("dark-theme");
+        if (body.classList.contains("dark-theme")) {
+          modeToggle.textContent = "LightMode";
+        } else {
+          modeToggle.textContent = "DarkMode";
+        }
+      }
+    </script>
+    <link
+      rel="apple-touch-icon"
+      sizes="180x180"
+      href="/images/favicon/apple-touch-icon.png"
+    />
+    <link
+      rel="icon"
+      sizes="32x32"
+      type="image/png"
+      href="/images/favicon/favicon-32x32.png"
+    />
+    <link
+      rel="icon"
+      sizes="16x16"
+      type="image/png"
+      href="/images/favicon/favicon-16x16.png"
+    />
+    <link rel="manifest" href="/images/favicon/site.webmanifest" />
+  </head>
+  <body>
+    <header>
+      <h1>Admin Dashboard</h1>
+    </header>
+    <nav>
+      <ul>
+        <li>
+          <span class="home"><ion-icon name="home-outline"></ion-icon></span>
+          <a href="/">Home</a>
+        </li>
+        <li>
+          <span class="settings"><ion-icon name="contrast"></ion-icon></span>
+          <a href="#" onclick="toggleDarkTheme()" id="modeToggle">DarkMode</a>
+        </li>
+        <li>
+          <span class="help">
+            <ion-icon name="help-circle-outline"></ion-icon>
+          </span>
+          <a href="#" id="helpLink">Help</a>
+        </li>
+      </ul>
+    </nav>
+
+    <div id="guidelineWrapper">
+      <h2>Guidelines</h2>
+      <p>Guidelines according to HIT:</p>
+      <p>1. Prohibited Items: Please note that alcohol and drugs, including weed, along with any harmful objects or substances, are strictly prohibited on campus. As an administrator, it is essential to ensure that no products promoting or involving these items are approved.</p>
+      <p>2. Professional Conduct: When reviewing product submissions, it is crucial to maintain a high level of professionalism. Under no circumstances should an illegal product be approved. It is our responsibility to uphold the law and promote a safe environment within the campus community.</p>
+    </div>
+
+    <main>
+      <section class="content">
+        <h2>Welcome to the Admin Dashboard!</h2>
+        <p>Here you can manage the website's produts.</p>
+      </section>
+    </main>
+    <div class="container">
+      <div class="box" id="pendingAdverts">
+        <p class="box0">Pending Uploads</p>
+        <span class="pending"><ion-icon name="time-outline"></ion-icon></span>
+      </div>
+
+      <div class="box1" id="approved">
+        <p class="box01">Approved Uploads</p>
+        <span class="approved">
+          <ion-icon name="checkmark-circle-outline"></ion-icon>
+        </span>
+      </div>
+
+      <div class="box2">
+        <p class="box02">Declined Uploads</p>
+        <span class="decline">
+          <ion-icon name="close-circle-outline"></ion-icon>
+        </span>
+      </div>
+    </div>
+    <footer>&copy; 2024 MUSIKA MARKETPLACE</footer>
+  </body>
+
+  <script>
+    document.querySelector("#pendingAdverts").addEventListener("click", () => {
+      window.location.assign("/admin/pending");
+    });
+    document.getElementById("approved").addEventListener("click", () => {
+        window.location.assign("/products");
+      });
+  </script>
+
+  <script>
+  const helpLink = document.getElementById("helpLink");
+    const guidelineWrapper = document.getElementById("guidelineWrapper");
+    
+    helpLink.addEventListener("click", function(event) {
+      event.preventDefault();
+      guidelineWrapper.classList.toggle("active");
+    });
+    </script>
+</html>

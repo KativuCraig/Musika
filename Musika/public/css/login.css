@@ -1,0 +1,173 @@
+*{
+
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: sans-serif;
+}
+
+header{
+
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 0;
+  padding: 20px 100px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  z-index: 99;
+
+}
+header .logo{
+  color: #fff;
+
+}body {
+  display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background: url(../images/universal.png) no-repeat;
+    background-size: cover;
+    background-position: center;
+}
+
+
+/* Loginform */
+.Logcontainer{
+  position: absolute;
+  width:300px;
+  height: 350px;
+  background: #fff;
+  border-radius: 5px;
+  overflow: hidden;
+  
+
+  
+}
+
+
+.Logcontainer .title{
+  line-height: 40px;
+  background: #0024ae;
+  padding-left: 20px;
+  border-radius: 5px 5px 0 0;
+  font-size: 20px;
+  color: #eec522;
+  font-weight: 600px;
+}
+
+.Logcontainer .title .Login .headicon{
+  padding-left: 105px;
+  font-size: 40px;
+  color: #fff;
+}
+
+.x{
+  position: relative;
+  color: #fff;
+  top: -10px;
+  right: -256px;
+  font-size: 23px;
+  align-items: center;
+}
+
+.x:hover{
+  cursor: pointer;
+  border: 1px solid black;
+  border-radius: 0 5px 0 0;
+  background: red;
+}
+
+
+.Logcontainer form{
+  padding: 30px 20px 25px 20px ;
+  
+}
+.Logcontainer form .row .eyes{
+  outline: none;
+  position: relative;
+  top: -26px;
+  cursor: pointer;
+  right: -238px;
+  
+  
+}
+
+
+
+.Logcontainer form .row{
+  height: 40px;
+  
+  margin-bottom: 20px;
+  position: relative;
+}
+
+.Logcontainer form .row .icon{
+  position: absolute;
+  width: 40px;
+  height: 100%;
+  color: #fff;
+  font-size: 18px;
+  background: #0024ae;
+  border: 1px solid lightgrey;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 5px 0px 0px 5px;
+
+  
+  
+}
+
+.Logcontainer form .register{
+  margin-bottom: 20px;
+}
+.Logcontainer form .button{
+  margin-bottom: 10px;
+}
+
+
+
+.Logcontainer form .row input{
+  height: 100%;
+  width: 100% ;
+  outline: none;
+  padding-left: 60px;
+  border-radius: 5px;
+  border: 1px solid lightgrey;
+  font-size: 15px;
+}
+
+
+
+.Logcontainer form .button input{
+  height: 37px ;
+  width: 100%;
+  background-color: #0024ae;
+  color: #eec522;
+  border-radius: 5px;
+  padding-left: 0px;
+  cursor: pointer;
+  border: none;
+  transition: all 0.3s ease ;
+  font-size: 17px;
+}
+
+.Logcontainer form .button input:hover{
+  background-color: #011f93;
+  
+  }
+
+ 
+  .Logcontainer .register {
+      color: #0024ae;
+      font-size: 15px;
+      text-decoration: none;
+
+  }
+
+  .Logcontainer .register:hover{
+      text-decoration: underline;
+      color: #011976;
+  }

@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Musika Products</title>
+    <link
+      rel="apple-touch-icon"
+      sizes="180x180"
+      href="/images/favicon/apple-touch-icon.png"
+    />
+    <link
+      rel="icon"
+      sizes="32x32"
+      type="image/png"
+      href="/images/favicon/favicon-32x32.png"
+    />
+    <link
+      rel="icon"
+      sizes="16x16"
+      type="image/png"
+      href="/images/favicon/favicon-16x16.png"
+    />
+    <link rel="stylesheet" href="/css/productsJ.css" />
+    <link rel="manifest" href="/images/favicon/site.webmanifest" />
+    <link rel="stylesheet" href="/css/core.css" />
+    <link rel="stylesheet" href="/css/theme-default.css" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3"
+      crossorigin="anonymous"
+    />
+    <link rel="stylesheet" href="/css/core.css" />
+    <link rel="stylesheet" href="/css/theme-default.css" />
+    <style>
+      .text-center {
+        color:#fff; 
+      }
+    </style>
+
+  </head>
+  <body>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="container">
+          <a class="navbar-brand" href="/">Musika</a>
+          <button
+            class="navbar-toggler"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#navbarNavDropdown"
+            aria-controls="navbarNavDropdown"
+            aria-expanded="false"
+            aria-label="Toggle navigation"
+          >
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarNavDropdown">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+              <li class="nav-item">
+                <a class="nav-link active" aria-current="page" href="/">Home</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="/AdvertHub">Advert Hub</a>
+              </li>
+              <li class="nav-item dropdown">
+                <a
+                  class="nav-link dropdown-toggle"
+                  href="#"
+                  id="navbarDropdownMenuLink"
+                  role="button"
+                  data-bs-toggle="dropdown"
+                  aria-expanded="false"
+                >
+                  Products
+                </a>
+                <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                  <!-- Dropdown menu items -->
+                  <li>
+                    <a
+                      class="dropdown-item"
+                      href="/products"
+                      data-category="All Products"
+                    >
+                      All Products
+                    </a>
+                    <a
+                      class="dropdown-item"
+                      href="#"
+                      data-category="Textbooks and Educational Material"
+                      onclick="fetchAdvertsByCategory(event,'Textbooks and Educational Material')"
+                    >
+                      Art, Textbooks and Educational Material
+                    </a>
+                  </li>
+                  <li>
+                    <a
+                      class="dropdown-item"
+                      href="#"
+                      data-category="Transportation"
+                      onclick="fetchAdvertsByCategory(event,'Transportation')"
+                    >
+                      Transportation
+                    </a>
+                  </li>
+                  <li>
+                    <a
+                      class="dropdown-item"
+                      href="#"
+                      class="dropdown-item"
+                      href="#"
+                      data-category="Electronics and Technology"
+                      onclick="fetchAdvertsByCategory(event,'Electronics and Technology')"
+                    >
+                      Electronics and Technology
+                    </a>
+                  </li>
+                  <li>
+                    <a
+                      class="dropdown-item"
+                      href="#"
+                      class="dropdown-item"
+                      href="#"
+                      data-category="Food and Beverages"
+                      onclick="fetchAdvertsByCategory(event,'Food and Beverages')"
+                    >
+                      Food and Beverages
+                    </a>
+                  </li>
+                  <li>
+                    <a
+                      class="dropdown-item"
+                      href="#"
+                      class="dropdown-item"
+                      href="#"
+                      data-category="Events and Tickets"
+                      onclick="fetchAdvertsByCategory(event,'Events and Tickets')"
+                    >
+                      Events and Tickets
+                    </a>
+                  </li>
+                  <li>
+                    <a
+                      class="dropdown-item"
+                      href="#"
+                      class="dropdown-item"
+                      href="#"
+                      data-category="Services and Jobs"
+                      onclick="fetchAdvertsByCategory(event,'Services and Jobs')"
+                      
+                    >
+                      Services and Jobs
+                    </a>
+                  </li>
+                  <li>
+                    <a
+                      class="dropdown-item"
+                      href="#"
+                      class="dropdown-item"
+                      href="#"
+                      data-category="Health and Wellness"
+                      onclick="fetchAdvertsByCategory(event,'Health and Wellness')"
+                    >
+                      Beauty, Health and Wellness
+                    </a>
+                  </li>
+                  <li>
+                    <a
+                      class="dropdown-item"
+                      href="#"
+                      class="dropdown-item"
+                      href="#"
+                      data-category="Travel and Study Abroad"
+                      onclick="fetchAdvertsByCategory(event,'Travel and Study Abroad')"
+                    >
+                      Travel and Study Abroad
+                    </a>
+                  </li>
+                </ul>
+              </li>
+                </ul>
+              </li>
+            </ul>
+            <form class="d-flex" onsubmit="Searchadverts(event)">
+              <input
+                class="form-control me-2"
+                type="search"
+                id="search"
+                placeholder="Search"
+                aria-label="Search"
+                
+              />
+              <button class="btn btn-outline-success" type="submit">
+                Search
+              </button>
+            </form>
+          </div>
+        </div>
+      </nav>
+
+    <!-- Navigation End!! -->
+    <h1 class="text-center">Products</h1>
+    <div class="container mt-5">
+      <div id="adverts" class="row mt-3">
+        <!-- Approved adverts here -->
+      </div>
+    </div>
+  </body>
+  <script
+    src="/scripts/bootstrap.bundle.min.js"
+    integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
+    crossorigin="anonymous"
+  ></script>
+  
+  <script>
+      let enlargedCard = null;
+      let filteredAdverts = [];
+ function fetchAdverts(query) {
+      fetch(`/api/adverts?search=${query}`, {
+        method: "GET",
+        credentials: "include",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      })
+        .then((response) => response.json())
+        .then((data) => {
+          console.log(data);
+          data.forEach((advert) => {
+            const advertElement = document.createElement("div");
+            advertElement.classList.add("card");
+            advertElement.classList.add("col-md-3");
+            advertElement.classList.add("col-xs-12");
+            advertElement.classList.add("col-lg-2");
+            advertElement.classList.add("col-sm-6");
+
+            advertElement.innerHTML = `
+              <img src='data:image/*;base64,${advert.image}' class="card-img-top" alt='${advert.productName}'>
+              <div class="card-body">
+                <h5 class='card-title'>${advert.productName}</h5>
+                <p class='card-text'>$${advert.price}</p>
+               
+             
+            `;
+
+            advertElement.addEventListener("click", () => {
+      if (enlargedCard === advertElement) {
+        // Clicked card is already enlarged, restore it to normal size
+        advertElement.classList.remove("enlarged");
+        advertElement.innerHTML = `
+          <img src='data:image/*;base64,${advertElement.advert.image}' class="card-img-top" alt='${advertElement.advert.productName}'>
+          <div class="card-body">
+            <h5 class='card-title'>${advertElement.advert.productName}</h5>
+            <p class='card-text'>Price:${advertElement.advert.price}</p>
+          `;
+        enlargedCard = null;
+      } else {
+        // Another card is already enlarged, restore it to normal size
+        if (enlargedCard !== null) {
+          enlargedCard.classList.remove("enlarged");
+          enlargedCard.innerHTML = `
+            <img src='data:image/*;base64,${enlargedCard.advert.image}' class="card-img-top" alt='${enlargedCard.advert.productName}'>
+            <div class="card-body">
+              <h5 class='card-title'>${enlargedCard.advert.productName}</h5>
+              <p class='card-text'>Price:${enlargedCard.advert.price}</p>
+            `;
+        }
+
+        // Enlarge the clicked card
+        advertElement.classList.add("enlarged");
+        advertElement.innerHTML = `
+          <img src='data:image/*;base64,${advert.image}' class="card-img-top" alt='${advert.productName}'>
+          <div class="card-body">
+            <h5 class='card-title'>${advert.productName}</h5>
+            <p class='card-text'>Category:${advert.category}</p>
+            <p class='card-text'>Price:${advert.price}</p>
+            <p class='card-text'>Contact:${advert.advertiserContact}</p>
+          `;
+        enlargedCard = advertElement;
+        enlargedCard.advert = advert; // Store 'advert' object as a property of enlargedCard
+      }
+    });
+
+            adverts.appendChild(advertElement);
+          });
+        })
+        .catch((err) => {
+          console.error("Error:", err);
+        });
+    }
+
+    //Fetch  all products when Page loads
+    fetchAdverts("");
+
+    //search products
+    
+function Searchadverts(event){
+  event.preventDefault();
+  let searchQuery = document.querySelector('#search').value.trim();
+
+  if (!searchQuery){
+    return;
+
+  }
+
+  fetch(`/api/adverts/search?productName=${searchQuery}`)
+  .then((response)=>{
+    if(!response){
+      throw new Error("Network Response was not okay!");
+    }
+    return response.json();
+  })
+  .then((data)=>{
+    if(!Array.isArray(data)){
+      console.log("Expected data to be an array!");
+    return
+    }
+    console.log(data);
+    adverts.innerHTML = "";
+
+    data.forEach((advert)=>{
+      const advertElement = document.createElement('div');
+      advertElement.classList.add(
+        "card", 
+        "col-md-3",
+        "col-xs-12",
+        "col-lg-2",
+        "col-sm-6"
+      );
+      advertElement.innerHTML = `
+          <img src='data:image/*;base64,${advert.image}' class="card-img-top" alt="${advert.productName}">
+          <div class="card-body">
+            <h5 class='card-title'>${advert.productName}</h5>
+            <p class='card-text'>$${advert.price}</p>
+          </div>
+        `;
+        adverts.appendChild(advertElement);
+    })
+
+  })
+  .catch((error)=>console.log(`Fetch error: ${error}`));
+
+}
+    // by category
+    function fetchAdvertsByCategory(event, category) {
+  event.preventDefault();
+
+  adverts.innerHTML = "";
+
+  fetch(`/api/adverts/${category}`)
+    .then((response) => {
+      if (response.ok) {
+        return response.json();
+      } else {
+        throw new Error("Network response was not ok");
+      }
+    })
+    .then((data) => {
+      data.forEach((advert) => {
+        const advertElement = document.createElement("div");
+        advertElement.classList.add("card");
+        advertElement.classList.add("col-md-3");
+        advertElement.classList.add("col-xs-12"); // Assuming responsiveness for smaller screens
+        advertElement.classList.add("col-lg-2"); // Assuming responsiveness for larger screens
+        advertElement.classList.add("col-sm-6"); // Assuming responsiveness for medium screens
+        advertElement.innerHTML = `
+          <img src='data:image/*;base64,${advert.image}' class="card-img-top" alt="${advert.productName}">
+          <div class="card-body">
+            <h5 class='card-title'>${advert.productName}</h5>
+            <p class='card-text'>$${advert.price}</p>
+          </div>
+        `;
+        adverts.appendChild(advertElement);
+      });
+    })
+    .catch((error) => console.error("Fetch Error:", error));
+
+}
+
+
+
+  </script>
+</html>

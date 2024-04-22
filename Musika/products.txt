@@ -1,0 +1,90 @@
+To add the sort by category:
+1. First add the data-category attribute to each dropdown item. This attribute will hold the category for each item:
+```javascript
+<ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+  <li><a class="dropdown-item" href="#" data-category="Textbooks and Educational Material">Textbooks and Educational Material</a></li>
+  <li><a class="dropdown-item" href="#" data-category="Transportation">Transportation</a></li>
+  <!-- ... -->
+</ul>
+```
+
+2. In the JS, add an event listener to each drop down item. When a drop down item is clicked, the event listener will call fetchAdverts with the category:
+```
+document.querySelectorAll('.dropdown-item').forEach(item => {
+    item.addEventListener('click', event => {
+        event.preventDefault(); // Prevent the default action
+        const category = event.target.getAttribute('data-category'); // Get the category of the clicked item
+        fetchAdverts(category); // Fetch adverts with the given category
+    });
+});
+```
+
+3. Finally, modify your fetchAdverts function to use the category parameter in the API request:
+```javascript
+function fetchAdverts(category) {
+    fetch(`/api/adverts/category/${category}`, { // Use the category in the API request
+        method: "GET",
+        credentials: "include",
+        headers: {
+            "Content-Type": "application/json",
+        },
+    })
+    // ...
+}
+```
+
+
+//Search Functionality:
+To create a search functionality, you need to create a new endpoint in your backend and then use this endpoint in your frontend.
+
+Backend: Create a new function in your advertsController.js file. This function will use the find method on the Advert model to find all adverts that match the given search query:
+```javascript
+// Get all Adverts by search query
+exports.getAdvertsBySearch = async (req, res) => {
+    const query = req.query.search;
+
+    try {
+        let adverts = await Advert.find({ productName: { $regex: query, $options: 'i' }, approved: true })
+        //convert image paths to base64
+        adverts = adverts.map(advert => {
+            const imagePath = Buffer.from(advert.image, 'base64')
+            const imageBuffer = fs.readFileSync(imagePath)
+            const imageBase64 = imageBuffer.toString('base64')
+
+            //replace the image with the base64 data
+            return { ...advert._doc, image: imageBase64 }
+        })
+        res.status(200).json(adverts)
+    } catch (error) {
+        res.status(500).json({ error: error.message })
+    }
+};
+```
+Then, add a route in your routes file to handle requests to this endpoint:
+```javascript
+// New route for getting adverts by search query
+router.get('/adverts/search', advertsController.getAdvertsBySearch);
+```
+
+Frontend: Add an event listener to your search form. When the form is submitted, the event listener will call fetchAdverts with the search query:
+```javascript
+document.querySelector('#search-form').addEventListener('submit', event => {
+    event.preventDefault(); // Prevent the form from being submitted
+    const query = document.querySelector('#search-input').value; // Get the search query
+    fetchAdverts(query); // Fetch adverts with the given search query
+});
+```
+
+Finally, modify your fetchAdverts function to use the query parameter in the API request:
+function fetchAdverts(query) {
+    fetch(`/api/adverts/search?search=${query}`, { // Use the search query in the API request
+        method: "GET",
+        credentials: "include",
+        headers: {
+            "Content-Type": "application/json",
+        },
+    })
+    // ...
+}
+
+Now, when you submit the search form, the page will fetch and display the adverts that match the search query.

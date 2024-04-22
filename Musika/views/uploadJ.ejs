@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Upload</title>
+    <link rel="stylesheet" href="/css/uploadJ.css" />
+    <link
+      rel="apple-touch-icon"
+      sizes="180x180"
+      href="/images/favicon/apple-touch-icon.png"
+    />
+    <link
+      rel="icon"
+      sizes="32x32"
+      type="image/png"
+      href="/images/favicon/favicon-32x32.png"
+    />
+    <link
+      rel="icon"
+      sizes="16x16"
+      type="image/png"
+      href="/images/favicon/favicon-16x16.png"
+    />
+    <link rel="manifest" href="/images/favicon/site.webmanifest" />
+  </head>
+  <body>
+    <a href="/products">Products</a>
+    <div class="container">
+    <h1>Create Advert</h1>
+    <div class="error" style="background-color: red"></div>
+    <form enctype="multipart/form-data">
+      <div>
+        <label for="productName">Product Name:</label>
+        <input
+          type="text"
+          id="productName"
+          name="productName"
+          class="textInput"
+          required
+        />
+      </div>
+      <div>
+        <label for="category">Category:</label>
+        <select name="category" id="category" required class="textInput">
+          <option value="">Select a Category</option>
+          <option value="Textbooks and Educational Material">
+           Art, Textbooks and Educational Material
+          </option>
+          <option value="Electronics and Technology">
+            Electronics and Technology
+          </option>
+          <option value="Stationery and Office Supplies">
+            Stationery and Office Supplies
+          </option>
+          <option value="Apparel and Merchandise">
+            Apparel and Merchandise
+          </option>
+          <option value="Food and Beverages">Food and Beverages</option>
+          <option value="Housing and Accommodation">
+            Housing and Accommodation
+          </option>
+          <option value="Transportation">Transportation</option>
+          <option value="Events and Tickets">Events and Tickets</option>
+          <option value="Services and Jobs">Services and Jobs</option>
+          <option value="Health and Wellness">Beauty, Health and Wellness</option>
+          <option value="Travel and Study Abroad">
+            Travel and Study Abroad
+          </option>
+          <option value="Community and Classifieds">
+            Community and Classifieds
+          </option>
+        </select>
+      </div>
+      <div>
+        <label for="price">Price:</label>
+        <input
+          type="number"
+          id="price"
+          name="price"
+          class="textInput"
+          required
+        />
+      </div>
+      <div>
+        <label for="advertiserContact">Advertiser Contact:</label>
+        <input
+          type="text"
+          class="textInput"
+          id="advertiserContact"
+          name="advertiserContact"
+          required
+          maxlength="10"
+          pattern="\d{10}"
+          oninput="validateContact(this)"
+        />
+        <div id="contactError" style="color: red;"></div>
+      </div>
+      <div>
+        <label for="description">Product Description</label>
+        <textarea
+          class="textInput"
+          name="description"
+          id="description"
+          cols="30"
+          rows="5"
+          placeholder="Describe your product...."
+        ></textarea>
+      </div>
+      <div>
+        <label for="image">Image:</label>
+        <input type="file" id="image" name="image" accept="image/*" required />
+      </div>
+      <button type="submit" class="button">Create Advert</button>
+    </form>
+  </div>
+
+    <script>
+      const form = document.querySelector("form");
+      const display = document.querySelector(".error");
+      form.addEventListener("submit", async (e) => {
+        e.preventDefault();
+        const formData = new FormData(form);
+        try {
+          const res = await fetch("/api/adverts/upload", {
+            method: "POST",
+            credentials: "include",
+            body: formData,
+          });
+          const data = await res.json();
+          if (res.status === 400 || res.status === 401) {
+            return (display.textContent = `${data.message}. ${
+              data.error ? data.error : ""
+            }`);
+          }
+          if (res.status === 200) {
+            alert("Advert Created Successfully");
+            location.assign("/products");
+          }
+        } catch (error) {
+          console.log(error);
+          console.log(error.message);
+        }
+      });
+    </script>
+
+    <script>
+      function validateContact(input) {
+        const contact = input.value;
+        const contactError = document.getElementById("contactError");
+    
+        if (contact.length !== 10 || !/^\d{10}$/.test(contact)) {
+          contactError.textContent = "Please enter a 10-digit contact number.";
+        } else {
+          contactError.textContent = "";
+        }
+      }
+    </script>
+  </body>
+</html>

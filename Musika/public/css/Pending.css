@@ -1,0 +1,84 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: sans-serif;
+}
+
+body{
+  margin: 20px;
+}
+  
+  #adverts {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start; /* Optional: Distribute evenly */
+    width: 100%; /* Optional: Set the width of the container */
+    margin-bottom: 20px;
+  }
+  
+  #adverts div {
+    flex: 0 0 20%;  /* Set width to 25% for 4 images per row */
+    /* Adjust padding and margin for spacing between adverts */
+    padding: 10px;
+    margin: 5px;
+    border: 1px solid #ddd; /* Optional: Add a border */
+    text-align: center; /* Optional: Center the content within each advert */
+  }
+  
+  #adverts img {
+    width: 100%;  /* Adjust image width if needed */
+    height: 250px;
+    border-radius: 5px;
+  }
+
+  #adverts button {
+    color:#fff;
+    padding: 10px 20px;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px; /* Add a slight roundness to corners */
+    margin: 5px; /* Add some margin for spacing */
+    float: left; /* Optional: Align buttons to the left */
+  }
+  
+  #adverts button.approve {
+    background-color: #0024ae; /* Blue color for approve button */
+  }
+  
+  #adverts button.approve:hover {
+    background-color: #011f93; /* Darker blue on hover */
+  }
+  
+  #adverts button.delete {
+    background-color: #f44336; /* Red color for delete button */
+  }
+  
+  #adverts button.delete:hover {
+    background-color: #D32F2F; /* Darker red on hover */
+  }
+
+  /* Style the home link */
+a.home {
+  color: #ffffff; /* Adjust text color as desired */
+  background-color: #0024ae;
+  text-decoration: none; /* Remove underline */
+  padding: 10px 15px; /* Add some padding */
+  border: 1px solid #eec522; /* Optional border */
+  border-radius: 4px; /* Add rounded corners */
+  margin-right: 20px; /* Add some margin to the right */
+}
+
+a.home:hover {
+  background-color: #011f93; /* Add a hover effect background color */
+}
+
+/* Style the pending heading */
+h1.pending {
+  color: #eec522;
+  font-size: 24px; /* Adjust font size as desired */
+  margin-bottom: 20px; /* Add some bottom margin */
+  text-align: center; /* Optional: Center align the text */
+}
+
+  

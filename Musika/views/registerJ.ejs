@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Create a Musika Account</title>
+    <link rel="stylesheet" href="/css/register.css" />
+    <link
+      rel="apple-touch-icon"
+      sizes="180x180"
+      href="/images/favicon/apple-touch-icon.png"
+    />
+    <link
+      rel="icon"
+      sizes="32x32"
+      type="image/png"
+      href="/images/favicon/favicon-32x32.png"
+    />
+    <link
+      rel="icon"
+      sizes="16x16"
+      type="image/png"
+      href="/images/favicon/favicon-16x16.png"
+    />
+    <link rel="manifest" href="/images/favicon/site.webmanifest" />
+    <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js" defer></script>
+    <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js" defer></script>
+  </head>
+  <body>
+    
+    <div class="Rcontainer">
+
+        <div class="title">
+      
+          <div class="Login"> <span class="Rheadicon"><ion-icon name="person-add-outline"></ion-icon></span></div>
+                </div>
+      
+        <form class="action">
+       <div class="error" style="background-color: red"></div>
+      
+           <div class="row">
+            <span class="icons"><ion-icon name="person"></ion-icon></span>
+             <input type="text" placeholder="Name" name="name" id="name" required class="textInput">
+           </div>
+      
+           <div class="row">
+            <span class="icons"><ion-icon name="person"></ion-icon></span>
+            <input type="text" placeholder="Surname"  name="surname" id="surname" required class="textInput">
+          </div>
+
+            <div class="row">
+              <span class="icons"><ion-icon name="person"></ion-icon></span>
+              <input type="text" placeholder="Username" id="username" required class="textInput"/>
+            </div>
+
+          <div class="row">
+            <span class="icons"><ion-icon name="mail"></ion-icon></span>
+          <input type="email" placeholder="Email Address" id="email" required class="textInput" />
+         </div>
+
+          <div class="row">
+            <span class="icons"><ion-icon name="lock-closed"></ion-icon></span>
+            <input type="password" placeholder="Password"  name="password"id="password" required class="textInput">
+          </div>
+
+          <div class="row">
+            <span class="icons"><ion-icon name="lock-closed"></ion-icon></span>
+            <input type="password" placeholder="Confirm Password"  name="passwordC"id="passwordC" required class="textInput">
+          </div>
+      
+           
+           <div class="button">
+             <input type="submit" value="Register" >
+           </div>
+      
+           <div class="alreadyIn">
+            <span class="LoggedIn">Already have an account?<a href="login"> Login</a></span>
+           </div>
+
+      </div>
+      
+      </form>
+      
+      </div>
+
+      <script>
+        const form = document.querySelector("form");
+        const name = document.querySelector("#name");
+        const surname = document.querySelector("#surname");
+        const email = document.querySelector("#email");
+        const username = document.querySelector("#username");
+        const password = document.querySelector("#password");
+        const passwordC = document.querySelector("#passwordC");
+        const display = document.querySelector(".error");
+      
+        form.addEventListener("submit", async (e) => {
+          e.preventDefault();
+          display.textContent = "";
+      
+          if (password.value !== passwordC.value) {
+            display.textContent = "Passwords do not match.";
+            return;
+          }
+      
+          // Email validation
+          const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+          if (!emailRegex.test(email.value)) {
+            display.textContent = "Invalid email address.";
+            return;
+          }
+      
+          try {
+            const res = await fetch("/api/auth/register", {
+              method: "POST",
+              credentials: "include",
+              body: JSON.stringify({
+                name: name.value,
+                surname: surname.value,
+                email: email.value,
+                username: username.value,
+                password: password.value,
+              }),
+              headers: { "Content-Type": "application/json" },
+            });
+      
+            const data = await res.json();
+            console.log(data);
+            if (res.status === 400 || res.status === 401) {
+              return (display.textContent = `${data.message}. ${
+                data.error ? data.error : ""
+              }`);
+            }
+            data.role === "admin"
+              ? location.assign("/admin")
+              : location.assign("/login");
+          } catch (error) {
+            console.log(error.message);
+          }
+        });
+      </script>
+  </body>
+</html>

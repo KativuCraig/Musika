@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Admin | Pending Adverts</title>
+    <link rel="stylesheet" href="/css/Pending.css">
+  </head>
+  <body>
+    <a href="/admin" class="home">Home</a>
+    <h1 class="pending">Pending Approval...</h1>
+    <div id="adverts">
+      <!-- Approved adverts here -->
+    </div>
+  </body>
+
+  <script>
+    const adverts = document.querySelector("#adverts");
+    fetch("/api/admin/pending", {
+      method: "GET",
+      credentials: "include",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        console.log(data);
+        data.forEach((advert) => {
+          const advertElement = document.createElement("div");
+          advertElement.innerHTML = `
+                <img src='data:image/*;base64,${advert.image}' alt='${advert.productName}'>
+                <h3>${advert.productName}</h3>
+                <p>Category:${advert.category}</p>
+                <p>Price:${advert.price}</p>
+                <p>Contact:${advert.advertiserContact}</p>
+                <button class="approve" onclick="approveAdvert('${advert._id}')">Approve</button>
+                <button class="delete" onclick="deleteAdvert('${advert._id}')">Delete</button>
+
+            `;
+          adverts.appendChild(advertElement);
+        });
+      })
+      .catch((err) => {
+        console.error("Error:", err);
+      });
+
+    function approveAdvert(id) {
+      // Send a request to the server to approve the advert
+      fetch(`/api/admin/approve/${id}`, {
+        method: "PUT",
+      })
+        .then((response) => response.json())
+        .then((data) => {
+          if (data.message) {
+            alert(data.message);
+            location.reload();
+          } else {
+            alert(data.error);
+          }
+        })
+        .catch((error) => console.error("Error:", error));
+    }
+
+    function deleteAdvert(id) {
+      // Send a request to the server to delete the advert
+      fetch(`/api/admin/delete/${id}`, {
+        method: "DELETE",
+      })
+        .then((response) => response.json())
+        .then((data) => {
+          if (data.message) {
+            alert(data.message);
+            //Re-fetch the pending adverts
+            fetchPendingAdverts();
+          } else {
+            alert(data.error);
+          }
+        })
+        .catch((error) => console.error("Error:", error));
+    }
+    // function fetchPendingAdverts() {
+    //   adverts.innerHTML = ""; // Clear the adverts
+    //   fetch("/api/admin/pending", {
+    //     method: "GET",
+    //     credentials: "include",
+    //     headers: {
+    //       "Content-Type": "application/json",
+    //     },
+    //   })
+    //     .then((response) => response.json())
+    //     .then((data) => {
+    //       console.log(data);
+    //       data.forEach((advert) => {
+    //         const advertElement = document.createElement("div");
+    //         advertElement.innerHTML = `
+    //             <img src='data:image/*;base64,${advert.image}' alt='${advert.productName}'>
+    //             <h3>${advert.productName}</h3>
+    //             <p>Category:${advert.category}</p>
+    //             <p>Price:${advert.price}</p>
+    //             <p>Contact:${advert.advertiserContact}</p>
+    //             <button onclick="approveAdvert('${advert._id}')">Approve</button>
+    //             <button onclick="deleteAdvert('${advert._id}')">Delete</button>
+    //         `;
+    //         adverts.appendChild(advertElement);
+    //       });
+    //     })
+    //     .catch((err) => {
+    //       console.error("Error:", err);
+    //     });
+    // }
+
+    // Fetch the pending adverts when the page loads
+    fetchPendingAdverts();
+  </script>
+</html>

@@ -1,0 +1,119 @@
+*{
+
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: sans-serif;
+}
+
+body{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background: url(../images/universal.png) no-repeat;
+  background-size: cover;
+  background-position: center;
+}
+
+
+.Rcontainer{
+  width:360px;
+  height: 535px;
+  background: #fff;
+  border-radius: 5px;
+  position: absolute;
+  overflow: hidden;
+  
+}
+
+.Rcontainer .title{
+  line-height: 80px;
+  background: #0024ae;
+  padding-left: 20px;
+  border-radius: 5px 5px 0 0;
+  font-size: 20px;
+  color: #eec522;
+  font-weight: 600px;
+}
+.Rcontainer .title .Login .Rheadicon{
+  padding-left: 125px;
+  font-size: 40px;
+  color: #fff;
+}
+
+
+.Rcontainer form{
+  padding: 30px 20px 25px 20px ;
+  
+}
+
+.Rcontainer form .row{
+  height: 40px;
+  
+  margin-bottom: 15px;
+  position: relative;
+}
+
+.Rcontainer form .row .icons{
+  position: absolute;
+  width: 40px;
+  height: 100%;
+  color: #fff;
+  font-size: 18px;
+  background: #0024ae;
+  border: 1px solid lightgrey;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 5px 0px 0px 5px;
+}
+
+
+
+.Rcontainer form .button{
+  margin-bottom: 10px;
+}
+
+
+.Rcontainer form .row input{
+  height: 100%;
+  width: 100% ;
+  outline: none;
+  padding-left: 60px;
+  border-radius: 5px;
+  border: 1px solid lightgrey;
+  font-size: 15px;
+}
+
+.Rcontainer form .button input{
+  height: 37px ;
+  width: 100%;
+  background-color: #0024ae;
+  color: #eec522;
+  border-radius: 5px;
+  padding-left: 0px;
+  cursor: pointer;
+  border: none;
+  transition: all 0.3s ease ;
+  font-size: 17px;
+}
+
+.Rcontainer form .button input:hover{
+  background-color: #011f93;
+  
+      
+  } 
+
+  .Rcontainer form .alreadyIn{
+      font-size: 15px;
+  }
+
+  .Rcontainer form .alreadyIn .LoggedIn a{
+      text-decoration: none;
+      color: #0024ae;
+
+  }
+  .Rcontainer form .alreadyIn .LoggedIn a:hover{
+      text-decoration: underline;
+  }

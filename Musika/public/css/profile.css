@@ -1,0 +1,115 @@
+body {
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  background: url(../images/universal.png) no-repeat;
+  background-position: center;
+  background-size: cover;
+  color: #fff;
+  min-height: 100vh;
+}
+button {
+  /* min-width: 130px; */
+  /* width: 50px; */
+  height: 40px;
+  color: #fff;
+  padding: 5px 5px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  position: relative;
+  display: inline-block;
+  outline: none;
+  border-radius: 20px;
+  border: none;
+  box-shadow: inset 2px 2px 2px 0px rgba(255, 255, 255, 0.5),
+    7px 7px 20px 0px rgba(0, 0, 0, 0.1), 4px 4px 5px 0px rgba(0, 0, 0, 0.1);
+  background: #0024ae;
+  text-align: center;
+  justify-content: center;
+  text-decoration: none;
+  text-transform: capitalize;
+}
+button:hover {
+  background-color: #d0a800;
+}
+
+.products { 
+  position: relative;
+  line-height: 50px;
+  left: 550px;
+  text-decoration: none;
+  color: #d0a800;
+  margin: auto;
+  font-size: 20px;
+}
+
+
+#profile {
+  margin: auto;
+  background-color: rgba(0, 0, 0, 0.6);
+  border: #d0a800 1px dashed;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  width: 750px;
+  height: 300px;
+}
+
+#profile #buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+#edit-profile {
+  display: none;
+}
+
+#profile.edit-mode #edit-profile {
+  display: block;
+}
+
+#profile.edit-mode #buttons {
+  display: none;
+}
+.row #edit-profile{
+  line-height: 100px;
+}
+
+#edit-profile-button{
+  left: -40px;
+  width: 160px;
+  font-size: 14px;
+}
+
+#delete-profile-button{
+  left: -40px;
+  width: 160px;
+  font-size: 14px;
+}
+
+#save-profile-button{
+  width: 150px;
+  font-size: 14px;
+}
+
+
+.row {
+  margin-bottom: 10px;
+  padding-left: 20px;
+}
+
+h4,
+h5,
+h6 {
+  margin: 5px 0;
+}
+
+input[type="text"],
+input[type="email"] {
+  width: 70%;
+  padding: 5px;
+  font-size: 14px;
+}
+
+
+

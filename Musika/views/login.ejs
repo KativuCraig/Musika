@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Login</title>
+    <!-- <link rel="stylesheet" href="/css/core.css" /> -->
+    <!-- <link rel="stylesheet" href="/css/theme-default.css" /> -->
+    <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js" defer></script>
+    <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js" defer></script>
+    <link rel="stylesheet" href="/css/login.css" />
+    <link
+      rel="apple-touch-icon"
+      sizes="180x180"
+      href="/images/favicon/apple-touch-icon.png"
+    />
+    <link
+      rel="icon"
+      sizes="32x32"
+      type="image/png"
+      href="/images/favicon/favicon-32x32.png"
+    />
+    <link
+      rel="icon"
+      sizes="16x16"
+      type="image/png"
+      href="/images/favicon/favicon-16x16.png"
+    />
+    <link rel="manifest" href="/images/favicon/site.webmanifest" />
+  </head>
+  <body>
+    <a href="/" class="">Home</a>
+
+    <div class="Logcontainer" id="loginFormContainer">
+      <div class="title">
+        <span class="x">
+          <ion-icon name="close-outline" ></ion-icon>
+        </span>
+        <div class="Login">
+          <span class="headicon"><ion-icon name="person-outline"></ion-icon></span>
+        </div>
+      </div>
+    
+      <form class="action">
+        <div class="error" style="background-color: red"></div>
+
+         <div class="row">
+          <span class="icon"><ion-icon name="person"></ion-icon></span>
+           <input type="text" id="username" name="username" placeholder="Username" required class="textInput">
+         </div>  
+    
+         <div class="row"> 
+          <span class="icon"><ion-icon name="lock-closed"></ion-icon></span>
+          <input type="password" id="password" name="password" placeholder="Password" required class="password">
+          <span class="eyes"><ion-icon name="eye-off-outline"></ion-icon></span>
+         </div>
+    
+         <div class="button" >
+           <input type="submit" value="Login">
+         </div>
+         <span>Don't have an account?</span><a  href="/signup" class="register"> Register</a>
+      </form>
+      
+    </div>
+
+
+    <script>
+      
+    let eyes = document.querySelector('.eyes');
+
+    let password1 = document.querySelector('.password');
+
+    eyes.onclick = function(){
+     if(password1.type =="password"){
+    password.type = "text";
+    eyes.src = "bullseye.png";
+
+    
+  }
+  else {
+    password1.type = "password";
+     
+  }
+}
+    </script>
+
+<script>
+  const Close = document.querySelector('.x');
+
+  Close.addEventListener('click',()=>{
+    setTimeout(function(){
+      window.location.href="/"; },300);//300 milli seconds (0.3) seconds delay
+    // Prevent the default behavior of the button click
+  event.preventDefault();
+})
+  </script>
+    
+    <script>
+      const form = document.querySelector("form");
+      const username = document.querySelector("#username");
+      const password = document.querySelector("#password");
+      const display = document.querySelector(".error");
+
+      form.addEventListener("submit", async (e) => {
+        e.preventDefault();
+        display.textContent = "";
+        try {
+          const res = await fetch("/api/auth/login", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            credentials: "include",
+            body: JSON.stringify({
+              username: username.value,
+              password: password.value,
+            }),
+          });
+          const data = await res.json();
+          if (res.status === 400 || res.status === 401) {
+            return (display.textContent = `${data.message}. ${
+              data.error ? data.error : ""
+            }`);
+          }
+          data.role === "admin"
+            ? location.assign("/admin")
+            : location.assign("/products");
+        } catch (error) {
+          console.log(error.message);
+        }
+      });
+    </script>
+  </body>
+</html>

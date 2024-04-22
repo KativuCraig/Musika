@@ -1,0 +1,128 @@
+
+*{
+
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: sans-serif;
+}
+html, body{
+    
+    display: grid;
+    height: 100%;
+    overflow: hidden;
+}
+
+blockquote{
+    color: #fff;
+    display: block;
+    width: 60%;
+    font-size: 37px;
+    font-weight: 300;
+    margin: 5rem auto;
+    font-family: 'Times New Roman', Times, serif; 
+}
+
+blockquote::before{
+    content: '\201c';
+}
+
+blockquote::after {
+    content: '\201d';
+    padding-left: 260px;
+
+}
+
+blockquote::before,
+blockquote::after{
+    font-size: 50px;
+}
+
+blockquote cite{
+    display: block;
+    
+    font-size: 30px;
+    font-style: normal;
+    line-height: 60px;
+    color:#eec522;
+    padding-left: 70px;
+
+}
+
+
+/* Universal Page */
+header{
+
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 0;
+    padding: 20px 100px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    z-index: 99;
+
+}
+img{
+    position: absolute;
+    opacity: 75%;
+    left: 20px;
+    height: 50px;
+    width: 50px;
+}
+body{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background: url(../images/universal.png) no-repeat;
+    background-size: cover;
+    background-position: center;
+}
+
+.start{
+    position: fixed;
+    font-family: sans-serif;
+    left: 700px;
+    width: 130px;
+    height: 45px;
+    color: #fff;
+    background: #0024ae;
+    border-radius: 24px;
+    cursor: pointer;
+    border: none;
+    transition: all 0.3s ease ;
+    font-size: 17px;
+    margin-top: 450px;
+    margin-left: 0%;
+    
+}
+
+
+.start:hover{
+    background-color: #011f93;
+}
+.Products{
+    position: fixed;
+    font-family: sans-serif;
+    left: 400px;
+    width: 150px;
+    height: 45px;
+    color: #fff;
+    background: #0024ae;
+    border-radius: 24px;
+    cursor: pointer;
+    border: none;
+    transition: all 0.3s ease ;
+    font-size: 17px;
+    margin-top: 450px;
+    margin-left: 0%;
+    
+}
+.Products:hover{
+    background-color: #011f93;
+}
+
+
+

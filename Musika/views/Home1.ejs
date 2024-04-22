@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial scale=1.0">
+        <title>Let's Get Started</title>
+        <link rel="stylesheet" href="/css/StartStyle.css">
+        <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js" defer></script>
+        <link rel="icon" type="image/png" href="/images/favicon/favicon-32x32.png" sizes="32x32">
+  <link rel="icon" type="image/png" href="/images/favicon/favicon-16x16.png" sizes="16x16">
+    </head>
+
+    <body>
+
+<header>
+    <h2 class="logo"> <img src="/images/favicon/apple-touch-icon.png" alt="Logo">
+
+    </h2>
+   
+</header>
+
+<blockquote>
+  The Secret Of Selling Anything Is Sincerity<br>
+  <cite>
+    Richard Sears<br>
+  </cite>
+</blockquote>
+
+<button class="start"  id="getStartedButton" onclick="redirectToPage()" >Advertise</button>
+<button class="Products"  id="ProductsButton" onclick="redirectToPage1()" >Explore Products</button>
+
+<script>
+  function redirectToPage1(){
+
+    //direct to products page and Adding a delay
+    setTimeout(function(){
+      window.location.href="products"; },300);//300 milli seconds (0.3) seconds delay
+    // Prevent the default behavior of the button click
+  event.preventDefault();
+  }
+</script>
+
+<script>
+  function redirectToPage(){
+
+    //direct to login and Adding a delay
+    setTimeout(function(){
+      window.location.href="login";},300);//300 milli seconds (0.3) seconds delay
+    // Prevent the default behavior of the button click
+  event.preventDefault();
+  }
+</script>
+
+    </body>
+</html>
