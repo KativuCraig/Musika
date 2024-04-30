@@ -15,7 +15,7 @@ This is a web application built with Express.js, MongoDB, HTML, CSS, and JavaScr
 1. Clone the repository:
 
 ```bash
-$ git clone https://github.com/BruceICzw/Musika
+$ git clone https://github.com/KativuCraig/Musika
 ```
 
 2. Install dependencies
