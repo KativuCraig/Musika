@@ -107,46 +107,9 @@ transition: all 0.5s ease;
     background: rgb(232, 231, 231);
 }
 
-.all .box2{
-    
-    margin-left: 670px;
-    margin-top: -205px;
-    margin-bottom: 55px;
-    width: 200px;
-    height: 150px;
-    color: black;
-    background: white;
-    border-radius: 10px;
-    box-shadow: 0 4px 8px 0 rgba(0, 0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19);
-    transition: all 0.3s ease;
-}
-
-.box2 .events{
-    position: relative;
-    top: 30px;
-    margin-left: 70px;
-    font-size: 60px;
-    color: #eec522;
-}
- .h8{
-    position: relative;
-    top: 30px;
-    margin-left: 75px;
-    font-weight: 100; 
-    font-size: 18px;
-    color: black;
-}
-
-.box2:hover{
-    cursor: pointer;
-    transition: all 0.3s ease;
-    background: rgb(232, 231, 231);
-}
-
 .all .box3{
     
-    margin-left: 990px;
-    margin-right: 30px;
+    margin-left: 670px;
     margin-top: -205px;
     margin-bottom: 55px;
     width: 200px;
@@ -165,6 +128,43 @@ transition: all 0.5s ease;
     font-size: 60px;
     color: #eec522;
 }
+ .h8{
+    position: relative;
+    top: 30px;
+    margin-left: 75px;
+    font-weight: 100; 
+    font-size: 18px;
+    color: black;
+}
+
+.box3:hover{
+    cursor: pointer;
+    transition: all 0.3s ease;
+    background: rgb(232, 231, 231);
+}
+
+.all .box2{
+    
+    margin-left: 990px;
+    margin-right: 30px;
+    margin-top: -205px;
+    margin-bottom: 55px;
+    width: 200px;
+    height: 150px;
+    color: black;
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19);
+    transition: all 0.3s ease;
+}
+
+.box2 .events{
+    position: relative;
+    top: 30px;
+    margin-left: 70px;
+    font-size: 60px;
+    color: #eec522;
+}
  .h9{
     position: relative;
     top: 30px;
@@ -174,7 +174,7 @@ transition: all 0.5s ease;
     color: black;
 }
 
-.box3:hover{
+.box2:hover{
     cursor: pointer;
     transition: all 0.3s ease;
     background: rgb(232, 231, 231);

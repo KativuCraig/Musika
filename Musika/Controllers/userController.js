@@ -112,3 +112,9 @@ exports.getAdvertsByUser = async (req, res) => {
         res.status(500).json({ error: error.message })
     }
 };
+
+//logout
+exports.logout = (req, res) => {
+    res.cookie('jwt', '', { maxAge: 1 });
+    res.status(200).json({ message: 'User successfully logged out!' })
+}

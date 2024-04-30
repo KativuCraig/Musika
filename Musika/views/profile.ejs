@@ -88,6 +88,7 @@
             <aside class="row" id="buttons">
               <button id="edit-profile-button">Edit Profile &#128394;</button>
               <button id="delete-profile-button">Delete Profile &#10060;</button>
+              <button id="logout">Logout</button>
             </aside>
             <aside class="row" id="edit-profile">
               <br/>
@@ -98,6 +99,7 @@
               <input type="email" id="email-input" />
               <br /><br />
               <button id="save-profile-button">Save Profile &#128190;</button>
+              
             </aside>
           </section>
         </div>
@@ -120,6 +122,27 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js"></script>
 
     <script>
+
+      const logout = document.querySelector("#logout");
+
+    logout.addEventListener("click", () => {
+      fetch("/api/user/logout", {
+        method: "POST",
+        credentials: "include",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      })
+        .then((response) => response.json())
+        .then((data) => {
+          if (data.message) {
+            window.location.assign("/login");
+          } else {
+            console.error("Failed to log out:", data.error);
+          }
+        });
+    });
+
       function getProfile() {
         const name = document.querySelector("#name");
         const username = document.querySelector("#username");
@@ -131,7 +154,13 @@
             "Content-Type": "application/json",
           },
         })
-          .then((response) => response.json())
+          .then((response) => {
+            if(response.status === 401) {
+              window.location.assign("/login");
+              return;
+            }
+            
+          })
           .then((data) => {
             console.log(data);
             name.textContent = `${data.name} ${data.surname}`;
@@ -219,6 +248,8 @@
         }
         else alert("error!");
       });
+
+     
 
       function getUserAdverts() {
         const adverts = document.querySelector(".adverts");

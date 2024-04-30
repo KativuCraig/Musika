@@ -18,6 +18,7 @@ app.use('/api/admin', require('./Routes/adminRoutes.js'))
 app.use('/api/user/', require('./Routes/userRoutes.js'))
 
 
+
 //Connecting the database
 connectDB();
 
